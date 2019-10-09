@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CrearTerminalPopUp"
+        <activity
+            android:name=".CrearTerminalPopUp"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".ClienteActivity" />
         <activity
             android:name=".CrearZonaPopUp"
             android:theme="@style/AppTheme.CustomTheme" />

@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(logInAsAdminIntent);
                             }else{
                                 loggedInUser=user;
-                                Intent logInAsClienteIntent = new Intent(getApplicationContext(), ClienteActivity.class);
-                                startActivity(logInAsClienteIntent);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Ingresado como cliente", Toast.LENGTH_SHORT);
+                                toast.show();
                             }
                         }else{
                             Toast toast = Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT);
