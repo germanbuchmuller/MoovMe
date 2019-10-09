@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MoovMe</string>
+    <string name="hint_login_username">Nombre de usuario</string>
+    <string name="hint_login_password">Contraseña</string>
+    <string name="login_button">Ingresar</string>
+    <string name="sign_in">¿No tienes cuenta? Registrate acá</string>
+    <string name="administrar_usuarios_btn">Administrar usuarios</string>
+    <string name="administrar_activos_btn">Administrar activos</string>
+    <string name="administrar_tarifas_btn">Administrar zonas y tarifas</string>
+
+    <string-array name="activos">
+        <item>Auto</item>
+        <item>Bicicleta</item>
+        <item>Monopatin</item>
+        <item>Moto</item>
+    </string-array>
+    <string name="title_activity_cliente">ClienteActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+</resources>

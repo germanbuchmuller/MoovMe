@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rellum.moovme">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".CrearTerminalPopUp"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".ClienteActivity" />
+        <activity
+            android:name=".CrearZonaPopUp"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".ComprarLoteActivosPopUp"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".CrearActivoPopUp"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".AdministrarActivosActivity" />
+        <activity android:name=".AgregarTarifaActivity" />
+        <activity android:name=".AdministrarTarifasActivity" />
+        <activity android:name=".AdminMenuActivity" />
+        <activity android:name=".RegistrarClienteActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
