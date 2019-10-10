@@ -72,7 +72,7 @@ public class ZonaTest {
             activosAEntregar.add(new Activo(moto,50));
         }
 
-        LoteDeActivos loteDeActivos=new LoteDeActivos(00001,activosAEntregar);
+        LoteDeActivos loteDeActivos=new LoteDeActivos(00001,activosAEntregar,"Pilar");
         pilar.entregarLoteDeActivos(loteDeActivos);
 
 

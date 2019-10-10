@@ -85,6 +85,7 @@ public class AdministradorDeZonas {
         ArrayList<String>result=new ArrayList<>();
         Iterator<Zona> iterator = zonas.values().iterator();
 
+
         while (iterator.hasNext()) {
             result.add(iterator.next().getNombre());
         }

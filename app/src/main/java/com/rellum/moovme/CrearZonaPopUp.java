@@ -30,6 +30,7 @@ public class CrearZonaPopUp extends AppCompatActivity {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int)(width*0.8),(int)(height*0.3));
+
         nombreDeZonaEditText=(EditText)findViewById(R.id.nombreDeZonaEditText);
         guardarBtn2=(Button)findViewById(R.id.guardarBtn2);
 

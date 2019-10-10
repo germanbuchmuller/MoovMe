@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class AdminMenuActivity extends AppCompatActivity {
     private Usuario loggedInUser;
-    private ArrayList<Activo> listaActivos;
     private Button administrarTarifasBtn;
     private Button administrarActivosBtn;
 
@@ -22,6 +21,8 @@ public class AdminMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
+
+
         this.loggedInUser=MainActivity.getLoggedInUser();
         setTitle("Bienvenido, "+loggedInUser.getFullname());
 

@@ -20,7 +20,7 @@ import com.rellum.moovme.clases.Usuario;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    private static ListaDeUsuarios listaDeUsuarios = new ListaDeUsuarios();
+    private static ListaDeUsuarios listaDeUsuarios;
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -34,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         tarifas=new Tarifario();
         tiposDeActivo=new HashMap<String, TipoDeActivo>();
         administradorDeZonas=new AdministradorDeZonas();
+        listaDeUsuarios = new ListaDeUsuarios();
 
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     toast.show();
                 }else{
                     try {
+                        //Nos fijamos si existe el usuario ingresado
                         Usuario user = listaDeUsuarios.getUserByUsername(usernameEditText.getText().toString());
                         if (user.getPassword().equals(passwordEditText.getText().toString())){
                             if (user.getClass()== Admin.class) {
