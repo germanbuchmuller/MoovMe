@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class CrearTerminalPopUp extends AppCompatActivity {
     private Spinner zonasSpinner;
     private EditText direccionEditText;
@@ -36,10 +38,7 @@ public class CrearTerminalPopUp extends AppCompatActivity {
         direccionEditText=(EditText)findViewById(R.id.direccionEditText);
         guardarBtn3=(Button)findViewById(R.id.guardarBtn3);
 
-        String[]zonas= new String[MainActivity.administradorDeZonas.getZonasListToString().size()];
-        for (int i = 0; i < MainActivity.administradorDeZonas.getZonasListToString().size(); i++) {
-            zonas[i]=MainActivity.administradorDeZonas.getZonasListToString().get(i);
-        }
+        ArrayList<String> zonas = MainActivity.administradorDeZonas.getZonasListToString();
 
         ArrayAdapter<String> adapter=new ArrayAdapter<>(this,R.layout.spinner_view,R.id.nameTextView,zonas);
         zonasSpinner.setAdapter(adapter);

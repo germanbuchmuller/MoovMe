@@ -22,7 +22,8 @@
             android:name=".CrearActivoPopUp"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".AdministrarActivosActivity" />
-        <activity android:name=".AgregarTarifaActivity" />
+        <activity android:name=".AgregarTarifaActivity"
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".AdministrarTarifasActivity" />
         <activity android:name=".AdminMenuActivity" />
         <activity android:name=".RegistrarClienteActivity" />

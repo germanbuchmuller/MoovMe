@@ -68,6 +68,7 @@ public class AdministrarTarifasActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getTitle().toString().equals("Agregar Tarifa")){
+            greyPanel2.setVisibility(View.VISIBLE);
             Intent agregarTarifaIntent=new Intent(getApplicationContext(), AgregarTarifaActivity.class);
             startActivity(agregarTarifaIntent);
         }else if (item.getTitle().toString().equals("Agregar Zona")){
