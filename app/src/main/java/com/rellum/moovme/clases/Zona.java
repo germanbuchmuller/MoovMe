@@ -1,20 +1,30 @@
 package com.rellum.moovme.clases;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class Zona {
     private String nombre;
     private HashMap<Integer,Terminal>terminales;
     private ArrayList<Integer>terminalesId;
     private HashMap<String, Cliente> clientesEnZona;
+    private HashMap<Cliente,Integer>clientesPuntajeTotal;
+    private HashMap<Cliente,Integer>clientesPuntajeParcial;
 
     public Zona(String nombre) {
         this.nombre = nombre;
         this.terminales = new HashMap<Integer, Terminal>();
         this.terminalesId=new ArrayList<Integer>();
         this.clientesEnZona = new HashMap<String, Cliente>();
+        this.clientesPuntajeTotal= new HashMap<>();
+        this.clientesPuntajeParcial= new HashMap<>();
     }
 
     public void agregarTerminal(int idTerminal, String direccion){
@@ -138,8 +148,6 @@ public class Zona {
         }else{
             throw new RuntimeException("La zona no contiene terminales");
         }
-
-
     }
 
     public boolean containsTerminal(Terminal terminal){
@@ -162,4 +170,51 @@ public class Zona {
         }
 
     }
+
+    public void agregarPuntosACliente(Cliente cliente, int puntos){
+        if (clientesPuntajeTotal.containsKey(cliente)) {
+            int puntosTotales = clientesPuntajeTotal.get(cliente);
+            int puntosParciales = clientesPuntajeParcial.get(cliente);
+            puntosParciales += puntos;
+            puntosTotales += puntos;
+            clientesPuntajeParcial.put(cliente, puntosParciales);
+            clientesPuntajeTotal.put(cliente, puntosTotales);
+        }else{
+            clientesPuntajeParcial.put(cliente, puntos);
+            clientesPuntajeTotal.put(cliente, puntos);
+        }
+    }
+
+    public void consumirPuntosAlCliente(Cliente cliente,int puntos){
+        if (clientesPuntajeParcial.containsKey(cliente)) {
+            int puntosParciales = clientesPuntajeParcial.get(cliente);
+            if (puntosParciales>=puntos){
+                puntosParciales -= puntos;
+                clientesPuntajeParcial.put(cliente, puntosParciales);
+            }else{
+                throw new RuntimeException("Puntos insuficientes");
+            }
+
+        }else{
+            throw new RuntimeException("Usuario no registrado en esta zona");
+        }
+    }
+
+    public HashMap<Cliente, Integer> getRanking(){
+        List<Map.Entry<Cliente, Integer> > lista = new LinkedList<Map.Entry<Cliente, Integer> >(clientesPuntajeTotal.entrySet());
+        Collections.sort(lista, new Comparator<Map.Entry<Cliente, Integer> >() {
+            public int compare(Map.Entry<Cliente, Integer> puntaje1, Map.Entry<Cliente, Integer> puntaje2)
+            {
+                return (puntaje2.getValue()).compareTo(puntaje1.getValue());
+            }
+        });
+
+        HashMap<Cliente, Integer> result = new LinkedHashMap<Cliente, Integer>();
+        for (Map.Entry<Cliente, Integer> entry : lista) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+
 }

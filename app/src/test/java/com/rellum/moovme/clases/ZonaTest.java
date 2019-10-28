@@ -84,4 +84,18 @@ public class ZonaTest {
 
 
     }
+
+    @Test
+    public void getRanking() {
+        Zona pilar = new Zona("Pilar");
+        Cliente cliente1= new Cliente("cliente1","cliente1","cliente1","cliente1",22);
+        Cliente cliente2= new Cliente("cliente2","cliente2","cliente2","cliente2",22);
+        Cliente cliente3= new Cliente("cliente3","cliente3","cliente3","cliente3",22);
+        pilar.agregarPuntosACliente(cliente1,30);
+        pilar.agregarPuntosACliente(cliente2,60);
+        pilar.agregarPuntosACliente(cliente3,40);
+
+        //Assert
+        System.out.println(pilar.getRanking());
+    }
 }

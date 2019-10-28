@@ -10,4 +10,6 @@ public class Cliente extends Usuario {
         this.alias=alias;
         this.celular=numeroCelular;
     }
+
+
 }

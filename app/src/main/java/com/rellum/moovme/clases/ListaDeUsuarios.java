@@ -1,15 +1,19 @@
 package com.rellum.moovme.clases;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class ListaDeUsuarios {
     private HashMap<String,Admin> admins;
     private HashMap<String,Cliente>clientes;
+    private HashMap<String, ArrayList<Cliente>>listaDeClientesPorZona;
 
 
     public ListaDeUsuarios() {
         admins=new HashMap<String,Admin>();
         clientes=new HashMap<String, Cliente>();
+        listaDeClientesPorZona=new HashMap<>();
         admins.put("admin",new Admin("Default Admin","admin","admin"));
 
     }
@@ -64,5 +68,57 @@ public class ListaDeUsuarios {
         }else{
             throw new RuntimeException("Usuario no encontrado");
         }
+    }
+
+    public void agregarClienteAZona(Cliente cliente, Zona zona){
+        if (listaDeClientesPorZona.containsKey(zona.getNombre())){
+            ArrayList<Cliente>clientesEnZona = listaDeClientesPorZona.get(zona.getNombre());
+            clientesEnZona.add(cliente);
+            listaDeClientesPorZona.put(zona.getNombre(),clientesEnZona);
+        }else{
+            ArrayList<Cliente>clientesEnZona =new ArrayList<>();
+            clientesEnZona.add(cliente);
+            listaDeClientesPorZona.put(zona.getNombre(),clientesEnZona);
+        }
+    }
+
+    public void agregarClienteAZona(Cliente cliente, String zona){
+        if (listaDeClientesPorZona.containsKey(zona)){
+            ArrayList<Cliente>clientesEnZona = listaDeClientesPorZona.get(zona);
+            clientesEnZona.add(cliente);
+            listaDeClientesPorZona.put(zona,clientesEnZona);
+        }else{
+            ArrayList<Cliente>clientesEnZona =new ArrayList<>();
+            clientesEnZona.add(cliente);
+            listaDeClientesPorZona.put(zona,clientesEnZona);
+        }
+    }
+
+    public void deleteClienteDeZona(Cliente cliente){
+        Iterator<String> iterator = listaDeClientesPorZona.keySet().iterator();
+
+
+        while (iterator.hasNext()) {
+            String zona=iterator.next();
+            ArrayList<Cliente>listaClientes=listaDeClientesPorZona.get(zona);
+            if (listaClientes.contains(cliente)){
+                listaClientes.remove(cliente);
+            }
+            listaDeClientesPorZona.put(zona,listaClientes);
+        }
+    }
+
+    public ArrayList<Cliente> getClientesByZona(String zona){
+        if (listaDeClientesPorZona.containsKey(zona)){
+            return listaDeClientesPorZona.get(zona);
+        }else
+            throw new RuntimeException("Zona no encontrada");
+    }
+
+    public ArrayList<Cliente> getClientesByZona(Zona zona){
+        if (listaDeClientesPorZona.containsKey(zona.getNombre())){
+            return listaDeClientesPorZona.get(zona.getNombre());
+        }else
+            throw new RuntimeException("Zona no encontrada");
     }
 }
