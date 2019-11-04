@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AdministrarUsuariosActivity"></activity>
         <activity
             android:name=".CrearTerminalPopUp"
             android:theme="@style/AppTheme.CustomTheme" />
@@ -22,7 +23,8 @@
             android:name=".CrearActivoPopUp"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".AdministrarActivosActivity" />
-        <activity android:name=".AgregarTarifaActivity"
+        <activity
+            android:name=".AgregarTarifaActivity"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".AdministrarTarifasActivity" />
         <activity android:name=".AdminMenuActivity" />
