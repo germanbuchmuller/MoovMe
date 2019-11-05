@@ -8,7 +8,7 @@ public class TerminalTest {
     @Test
     public void agregarActivo() {
         Terminal terminal=new Terminal(0001,"Dirección 1");
-        TipoDeActivo moto = new TipoDeActivo("Moto");
+        TipoDeActivo moto = new TipoDeActivo("Moto",20);
         Activo activo=new Activo(moto,50);
         terminal.agregarActivo(activo);
 
@@ -19,8 +19,8 @@ public class TerminalTest {
     @Test
     public void getCantidadDeActivosDisponibles(TipoDeActivo tipoDeActivo) {
         Terminal terminal=new Terminal(0001,"Dirección 1");
-        TipoDeActivo moto = new TipoDeActivo("Moto");
-        TipoDeActivo bici = new TipoDeActivo("Bicicleta");
+        TipoDeActivo moto = new TipoDeActivo("Moto",20);
+        TipoDeActivo bici = new TipoDeActivo("Bicicleta",20);
         terminal.agregarActivo(new Activo(moto,50));
         terminal.agregarActivo(new Activo(moto,50));
         terminal.agregarActivo(new Activo(bici,50));

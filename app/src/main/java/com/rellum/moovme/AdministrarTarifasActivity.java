@@ -11,13 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.rellum.moovme.clases.Tarifario;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AdministrarTarifasActivity extends AppCompatActivity {
     private static Tarifario tarifas;
@@ -107,6 +107,10 @@ public class AdministrarTarifasActivity extends AppCompatActivity {
             greyPanel2.setVisibility(View.VISIBLE);
             Intent crearTerminalIntent=new Intent(getApplicationContext(), CrearTerminalPopUp.class);
             startActivity(crearTerminalIntent);
+        }else if(item.getTitle().toString().equals("Agregar Puntaje")){
+            greyPanel2.setVisibility(View.VISIBLE);
+            Intent agregarPuntajeIntent=new Intent(getApplicationContext(), AgregarPuntajePopUp.class);
+            startActivity(agregarPuntajeIntent);
         }
 
 

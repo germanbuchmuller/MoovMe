@@ -55,6 +55,33 @@ public class Tarifario {
         throw new RuntimeException("Precio no encontrado");
     }
 
+    public int getPrice(TipoDeActivo tipoDeActivo, String zona){
+        if (lista.keySet().contains(zona)){
+            if (lista.get(zona).keySet().contains(tipoDeActivo)){
+                return lista.get(zona).get(tipoDeActivo);
+            }
+        }
+        throw new RuntimeException("Precio no encontrado");
+    }
+
+    public int getPrice(Activo activo, Zona zona){
+        if (lista.keySet().contains(zona.getNombre())){
+            if (lista.get(zona.getNombre()).keySet().contains(activo.getType())){
+                return lista.get(zona.getNombre()).get(activo.getType());
+            }
+        }
+        throw new RuntimeException("Precio no encontrado");
+    }
+
+    public int getPrice(TipoDeActivo tipoDeActivo, Zona zona){
+        if (lista.keySet().contains(zona.getNombre())){
+            if (lista.get(zona.getNombre()).keySet().contains(tipoDeActivo)){
+                return lista.get(zona.getNombre()).get(tipoDeActivo);
+            }
+        }
+        throw new RuntimeException("Precio no encontrado");
+    }
+
     public ArrayList<String> getZonasList(){
         ArrayList<String>returnResult=new ArrayList<String >();
         Iterator value = this.zonas.iterator();

@@ -1,15 +1,14 @@
 package com.rellum.moovme;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.rellum.moovme.clases.Cliente;
 import com.rellum.moovme.clases.TipoDeActivo;
@@ -17,6 +16,9 @@ import com.rellum.moovme.clases.TipoDeActivo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MenuClientesActivity extends AppCompatActivity {
     private ArrayAdapter<String>rankingAdapter;
@@ -26,7 +28,10 @@ public class MenuClientesActivity extends AppCompatActivity {
     private ListView rankingListView;
     private ListView activosListView;
     private View greyPanel3;
+    private Button entregarActivoBtn;
     private static TipoDeActivo tipoDeActivoSeleccionado;
+    private TextView activoTextView;
+    private TextView rankingTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,9 @@ public class MenuClientesActivity extends AppCompatActivity {
         setTitle("Bienvenido, "+MainActivity.getLoggedInUser().getFullname());
         rankingListView=(ListView)findViewById(R.id.rankingListView);
         activosListView=(ListView)findViewById(R.id.activosListView);
+        rankingTextView=(TextView)findViewById(R.id.rankingTextView);
+        activoTextView=(TextView)findViewById(R.id.activoTextView);
+        entregarActivoBtn=(Button)findViewById(R.id.entregarActivoBtn);
         greyPanel3=(View)findViewById(R.id.greyPanel3);
         updateLists();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -52,6 +60,36 @@ public class MenuClientesActivity extends AppCompatActivity {
                         tipoDeActivoSeleccionado=activosDisponibles.get(position);
                         Intent menuClienteIntent=new Intent(getApplicationContext(),EstablecerHoraDeEntregaPopUp.class);
                         startActivity(menuClienteIntent);
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        entregarActivoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                builder.setTitle("¿Entregar activo?");
+                builder.setMessage("");
+
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        greyPanel3.setVisibility(View.VISIBLE);
+                        Intent entregarActivoIntent=new Intent(getApplicationContext(),EntregarActivoPopUp.class);
+                        startActivity(entregarActivoIntent);
                         dialog.dismiss();
                     }
                 });
@@ -89,7 +127,12 @@ public class MenuClientesActivity extends AppCompatActivity {
         activosDisponibles=MainActivity.getTermialActualDelCliente().getTiposDeActivoDisponible();
         ArrayList<String>tempActivos=new ArrayList<>();
         for (TipoDeActivo activosDisponible : activosDisponibles) {
-            tempActivos.add(activosDisponible.toString());
+            try{
+                tempActivos.add(activosDisponible.toString()+"   "+"$"+MainActivity.getTarifas().getPrice(activosDisponible,MainActivity.getZonaActualDelCliente())+"/minuto");
+            }catch (RuntimeException exception){
+                tempActivos.add(activosDisponible.toString()+"   "+"$-");
+            }
+
         }
         if (tempActivos.size()==0){
             tempActivos.add("No hay activos disponibles en esta terminal");
@@ -103,5 +146,18 @@ public class MenuClientesActivity extends AppCompatActivity {
         super.onResume();
         updateLists();
         greyPanel3.setVisibility(View.INVISIBLE);
+        if (MainActivity.getLoggedInUser().getAlquiler()==null){
+            rankingListView.setVisibility(View.VISIBLE);
+            activosListView.setVisibility(View.VISIBLE);
+            rankingTextView.setVisibility(View.VISIBLE);
+            activoTextView.setVisibility(View.VISIBLE);
+            entregarActivoBtn.setVisibility(View.INVISIBLE);
+        }else{
+            rankingListView.setVisibility(View.INVISIBLE);
+            activosListView.setVisibility(View.INVISIBLE);
+            rankingTextView.setVisibility(View.INVISIBLE);
+            activoTextView.setVisibility(View.INVISIBLE);
+            entregarActivoBtn.setVisibility(View.VISIBLE);
+        }
     }
 }

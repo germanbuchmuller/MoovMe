@@ -23,7 +23,7 @@ public class ZonaTest {
         Zona pilar = new Zona("Pilar");
         pilar.agregarTerminal(0001,"Mariano Acosta 1611");
         ArrayList<Activo>activos = new ArrayList<>();
-        TipoDeActivo bicicleta = new TipoDeActivo("Bicicleta");
+        TipoDeActivo bicicleta = new TipoDeActivo("Bicicleta",20);
         activos.add(new Activo(bicicleta,80));
         pilar.agregarActivosALaTerminal(0001,activos);
 
@@ -64,7 +64,7 @@ public class ZonaTest {
         pilar.agregarTerminal(0002,"Dirección 1");
         pilar.agregarTerminal(0003,"Dirección 2");
         pilar.agregarTerminal(0004,"Dirección 3");
-        TipoDeActivo moto  =new TipoDeActivo("Moto");
+        TipoDeActivo moto  =new TipoDeActivo("Moto",20);
 
         ArrayList<Activo>activosAEntregar = new ArrayList<>();
 

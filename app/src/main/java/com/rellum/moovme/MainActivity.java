@@ -8,11 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.rellum.moovme.clases.Admin;
 import com.rellum.moovme.clases.AdministradorDeZonas;
 import com.rellum.moovme.clases.ListaDeUsuarios;
+import com.rellum.moovme.clases.OperadorDePuntaje;
 import com.rellum.moovme.clases.Tarifario;
 import com.rellum.moovme.clases.Terminal;
 import com.rellum.moovme.clases.TipoDeActivo;
@@ -20,6 +19,8 @@ import com.rellum.moovme.clases.Usuario;
 import com.rellum.moovme.clases.Zona;
 
 import java.util.HashMap;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static ListaDeUsuarios listaDeUsuarios;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public static AdministradorDeZonas administradorDeZonas;
     private static Zona zonaActualDelCliente;
     private static Terminal termialActualDelCliente;
+    private static OperadorDePuntaje operadorDePuntaje;
 
 
     @Override
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         tiposDeActivo=new HashMap<String, TipoDeActivo>();
         administradorDeZonas=new AdministradorDeZonas();
         listaDeUsuarios = new ListaDeUsuarios();
+        operadorDePuntaje=new OperadorDePuntaje();
 
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
@@ -128,5 +131,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setTermialActualDelCliente(Terminal termialActualDelCliente) {
         MainActivity.termialActualDelCliente = termialActualDelCliente;
+    }
+
+    public static OperadorDePuntaje getOperadorDePuntaje() {
+        return operadorDePuntaje;
+    }
+
+    public static void updatePuntajes(OperadorDePuntaje nuevoOperadorDePuntaje){
+        operadorDePuntaje=nuevoOperadorDePuntaje;
     }
 }

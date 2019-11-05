@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EstablecerHoraDeEntregaPopUp"
+        <activity android:name=".EntregarActivoPopUp"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".AgregarPuntajePopUp"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".EstablecerHoraDeEntregaPopUp"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".MenuClientesActivity" />
         <activity android:name=".SeleccionarZonaClienteActivity" />

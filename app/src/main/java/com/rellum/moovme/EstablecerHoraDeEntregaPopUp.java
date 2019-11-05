@@ -1,8 +1,5 @@
 package com.rellum.moovme;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -15,7 +12,9 @@ import com.rellum.moovme.clases.Alquiler;
 import com.rellum.moovme.clases.Cliente;
 
 import java.util.Calendar;
-import java.util.Date;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EstablecerHoraDeEntregaPopUp extends AppCompatActivity {
     private EditText horaEditText;
@@ -67,11 +66,12 @@ public class EstablecerHoraDeEntregaPopUp extends AppCompatActivity {
                     Integer[]time2= new Integer[2];
                     time2[0]= Integer.parseInt(horaEditText.getText().toString());
                     time2[1]= Integer.parseInt(minutoEditText.getText().toString());
-                    alquiler=new Alquiler((Cliente) MainActivity.getLoggedInUser(),time,time2,MainActivity.getTermialActualDelCliente(),MainActivity.getTermialActualDelCliente().getActivo(MenuClientesActivity.getTipoDeActivoSeleccionado()));
+                    alquiler=new Alquiler((Cliente) MainActivity.getLoggedInUser(),time,time2,MainActivity.getTermialActualDelCliente(),MainActivity.getTermialActualDelCliente().getActivo(MenuClientesActivity.getTipoDeActivoSeleccionado()),MainActivity.getZonaActualDelCliente());
                 }else {
-                    alquiler=new Alquiler((Cliente) MainActivity.getLoggedInUser(),time,MainActivity.getTermialActualDelCliente(),MainActivity.getTermialActualDelCliente().getActivo(MenuClientesActivity.getTipoDeActivoSeleccionado()));
+                    alquiler=new Alquiler((Cliente) MainActivity.getLoggedInUser(),time,MainActivity.getTermialActualDelCliente(),MainActivity.getTermialActualDelCliente().getActivo(MenuClientesActivity.getTipoDeActivoSeleccionado()),MainActivity.getZonaActualDelCliente());
                 }
                 MainActivity.getLoggedInUser().setAlquiler(alquiler);
+                finish();
             }
         });
 

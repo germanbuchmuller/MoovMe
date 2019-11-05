@@ -1,21 +1,25 @@
 package com.rellum.moovme.clases;
 
+import com.rellum.moovme.MainActivity;
+
 public class Alquiler {
     private Cliente cliente;
     private Integer[]horaDeEmision;
     private Integer[]horaDeEntregaEstimada;
     private Terminal terminalDeSalida;
     private Activo activoAlquilado;
+    private Zona zona;
 
-    public Alquiler(Cliente cliente, Integer[] horaDeEmision, Integer[] horaDeEntregaEstimada, Terminal terminalDeSalida, Activo activoAlquilado) {
+    public Alquiler(Cliente cliente, Integer[] horaDeEmision, Integer[] horaDeEntregaEstimada, Terminal terminalDeSalida, Activo activoAlquilado,Zona zona) {
         this.cliente = cliente;
         this.horaDeEmision = horaDeEmision;
         this.horaDeEntregaEstimada = horaDeEntregaEstimada;
         this.terminalDeSalida = terminalDeSalida;
         this.activoAlquilado = activoAlquilado;
+        this.zona=zona;
     }
 
-    public Alquiler(Cliente cliente, Integer[] horaDeEmision, Terminal terminalDeSalida, Activo activoAlquilado) {
+    public Alquiler(Cliente cliente, Integer[] horaDeEmision, Terminal terminalDeSalida, Activo activoAlquilado, Zona zona) {
         this.cliente = cliente;
         this.horaDeEmision = horaDeEmision;
         this.terminalDeSalida = terminalDeSalida;
@@ -23,6 +27,7 @@ public class Alquiler {
         horaDeEntregaEstimada=new Integer[2];
         horaDeEntregaEstimada[0]=-1;
         horaDeEntregaEstimada[1]=-1;
+        this.zona=zona;
     }
 
     public Cliente getCliente() {
@@ -59,7 +64,15 @@ public class Alquiler {
         }
     }
 
-    public int getTotalAPagar(int precioPorMinuto,Integer[] horaDeEntrega ){
-        return precioPorMinuto*calcularTiempoDeAlquiler(horaDeEntrega);
+    public int getTotalAPagar(Integer[] horaDeEntrega ){
+        return (MainActivity.getTarifas().getPrice(activoAlquilado,zona))*calcularTiempoDeAlquiler(horaDeEntrega);
+    }
+
+    public int getPuntaje(Integer[] horaDeEntrega){
+        if (isHoraDeEntregaEstimadaAcertada(horaDeEntrega)){
+            return  (int)(activoAlquilado.getType().getPuntos()*1.2);
+        }else{
+            return activoAlquilado.getType().getPuntos();
+        }
     }
 }

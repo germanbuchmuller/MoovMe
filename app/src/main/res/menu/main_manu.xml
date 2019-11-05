@@ -8,5 +8,6 @@
         android:id="@+id/addzone"
         android:title="Agregar Tarifa"
         app:showAsAction="never" />
+    <item android:title="Agregar Puntaje" />
 
 </menu>
