@@ -44,68 +44,88 @@ public class MenuClientesActivity extends AppCompatActivity {
         activoTextView=(TextView)findViewById(R.id.activoTextView);
         entregarActivoBtn=(Button)findViewById(R.id.entregarActivoBtn);
         greyPanel3=(View)findViewById(R.id.greyPanel3);
-        updateLists();
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        activosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                builder.setTitle("¿Deseas alquilar un/una "+activosDisponibles.get(position).toString()+"?");
-                builder.setMessage("");
+        if (MainActivity.getLoggedInUser().getAlquiler()==null){
+            rankingListView.setVisibility(View.VISIBLE);
+            activosListView.setVisibility(View.VISIBLE);
+            rankingTextView.setVisibility(View.VISIBLE);
+            activoTextView.setVisibility(View.VISIBLE);
+            entregarActivoBtn.setVisibility(View.INVISIBLE);
+        }else{
+            rankingListView.setVisibility(View.INVISIBLE);
+            activosListView.setVisibility(View.INVISIBLE);
+            rankingTextView.setVisibility(View.INVISIBLE);
+            activoTextView.setVisibility(View.INVISIBLE);
+            entregarActivoBtn.setVisibility(View.VISIBLE);
+        }
 
-                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialog, int which) {
-                        greyPanel3.setVisibility(View.VISIBLE);
-                        tipoDeActivoSeleccionado=activosDisponibles.get(position);
-                        Intent menuClienteIntent=new Intent(getApplicationContext(),EstablecerHoraDeEntregaPopUp.class);
-                        startActivity(menuClienteIntent);
-                        dialog.dismiss();
-                    }
-                });
+            updateLists();
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            activosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    builder.setTitle("¿Deseas alquilar un/una "+activosDisponibles.get(position).toString()+"?");
+                    builder.setMessage("");
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                    builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
+                        public void onClick(DialogInterface dialog, int which) {
+                            greyPanel3.setVisibility(View.VISIBLE);
+                            tipoDeActivoSeleccionado=activosDisponibles.get(position);
+                            Intent menuClienteIntent=new Intent(getApplicationContext(),EstablecerHoraDeEntregaPopUp.class);
+                            startActivity(menuClienteIntent);
+                            dialog.dismiss();
+                        }
+                    });
 
-        entregarActivoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
 
-                builder.setTitle("¿Entregar activo?");
-                builder.setMessage("");
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
 
-                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            });
 
-                    public void onClick(DialogInterface dialog, int which) {
-                        greyPanel3.setVisibility(View.VISIBLE);
-                        Intent entregarActivoIntent=new Intent(getApplicationContext(),EntregarActivoPopUp.class);
-                        startActivity(entregarActivoIntent);
-                        dialog.dismiss();
-                    }
-                });
+            entregarActivoBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    builder.setTitle("¿Entregar activo?");
+                    builder.setMessage("");
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                    builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
+                        public void onClick(DialogInterface dialog, int which) {
+                            greyPanel3.setVisibility(View.VISIBLE);
+                            Intent entregarActivoIntent=new Intent(getApplicationContext(),EntregarActivoPopUp.class);
+                            startActivity(entregarActivoIntent);
+                            entregarActivoBtn.setVisibility(View.INVISIBLE);
+                            dialog.dismiss();
+                        }
+                    });
+
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            });
+
+
+
     }
 
     public static TipoDeActivo getTipoDeActivoSeleccionado() {
@@ -152,12 +172,14 @@ public class MenuClientesActivity extends AppCompatActivity {
             rankingTextView.setVisibility(View.VISIBLE);
             activoTextView.setVisibility(View.VISIBLE);
             entregarActivoBtn.setVisibility(View.INVISIBLE);
+            setTitle("Bienvenido, "+MainActivity.getLoggedInUser().getFullname()+"        Puntos: "+MainActivity.getZonaActualDelCliente().getPuntajeCliente((Cliente) MainActivity.getLoggedInUser()));
         }else{
             rankingListView.setVisibility(View.INVISIBLE);
             activosListView.setVisibility(View.INVISIBLE);
             rankingTextView.setVisibility(View.INVISIBLE);
             activoTextView.setVisibility(View.INVISIBLE);
             entregarActivoBtn.setVisibility(View.VISIBLE);
+            setTitle("Estado: Alquilando Activo");
         }
     }
 }

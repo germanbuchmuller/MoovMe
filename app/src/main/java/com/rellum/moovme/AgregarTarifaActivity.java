@@ -73,7 +73,7 @@ public class AgregarTarifaActivity extends AppCompatActivity {
                         if (precioEditText.getText().toString().length()>0){
                             try {
                                 Activo unActivo = new Activo(MainActivity.tiposDeActivo.get(activoSpinner.getSelectedItem().toString()),0);
-                                tarifas.agregarTarifa(unActivo,zonaSpinner2.getSelectedItem().toString(),Integer.parseInt(precioEditText.getText().toString()));
+                                tarifas.agregarTarifa(unActivo,zonaSpinner2.getSelectedItem().toString(),Double.parseDouble(precioEditText.getText().toString()));
                                 Toast toast4=Toast.makeText(getApplicationContext(),"Tarifa creada con éxito",Toast.LENGTH_SHORT);
                                 toast4.show();
                                 finish();

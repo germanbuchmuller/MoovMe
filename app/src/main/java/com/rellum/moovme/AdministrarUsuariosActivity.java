@@ -1,16 +1,25 @@
 package com.rellum.moovme;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.rellum.moovme.clases.Admin;
+import com.rellum.moovme.clases.Cliente;
+
 import java.util.ArrayList;
 
 public class AdministrarUsuariosActivity extends AppCompatActivity {
@@ -20,6 +29,9 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
     private ArrayList<String>admins;
     private  ArrayAdapter<String> adapterClientes;
     private  ArrayAdapter<String> adapterAdmins;
+    private ArrayList<String>clientes2;
+    private View greyPanel4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +41,7 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
 
         userTypeSpinner=(Spinner)findViewById(R.id.userTypeSpinner);
         usersListView=(ListView)findViewById(R.id.usersListView);
+        greyPanel4=(View)findViewById(R.id.greyPanel4);
 
         String[]userTypes= new String[2];
         userTypes[0]="Clientes";
@@ -46,10 +59,8 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
             {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 if(selectedItem.equals("Clientes")){
-
                     usersListView.setAdapter(adapterClientes);
                 }else{
-                    Toast toast=Toast.makeText(getApplicationContext(),"Seleccionado Administradores",Toast.LENGTH_SHORT);
                     usersListView.setAdapter(adapterAdmins);
                 }
             }
@@ -74,7 +85,13 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
                         if (userTypeSpinner.getSelectedItem().toString().equals("Clientes")){
                             MainActivity.getListaDeUsuarios().deleteUserByUsername(clientes.get(pos));
                         }else{
-                            MainActivity.getListaDeUsuarios().deleteUserByUsername(admins.get(pos));
+                            if (!admins.get(pos).equals("admin")){
+                                MainActivity.getListaDeUsuarios().deleteUserByUsername(admins.get(pos));
+                            }else{
+                                Toast toast=Toast.makeText(getApplicationContext(),"Error: No puedes eliminar al Default Admin",Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+
                         }
 
                         updateList();
@@ -102,14 +119,98 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
             }
         });
 
+        usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+
+                if (userTypeSpinner.getSelectedItem().toString().equals("Clientes")){
+                    final Cliente cliente=(Cliente)MainActivity.getListaDeUsuarios().getUserByUsername(clientes.get(position));
+                    if (cliente.isBanned()){
+                        builder.setTitle("¿Desbanear cliente?");
+                    }else{
+                        builder.setTitle("¿Banear cliente?");
+                    }
+                    builder.setMessage("");
+
+                    builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+
+                           if (cliente.isBanned()){
+                               cliente.undoBan();
+                           }else {
+                               cliente.ban();
+                           }
+                           updateList();
+                           usersListView.setAdapter(adapterClientes);
+                           dialog.dismiss();
+                        }
+                    });
+
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            }
+        });
+
 
 
     }
 
     private void updateList(){
         clientes=MainActivity.getListaDeUsuarios().getAllClientes();
+        clientes2=new ArrayList<>();
+        for (String cliente : clientes) {
+            Cliente cliente2=(Cliente)MainActivity.getListaDeUsuarios().getUserByUsername(cliente);
+            if (cliente2.isBanned()){
+                clientes2.add(cliente+"    "+"*BANEADO*");
+            }else{
+                clientes2.add(cliente);
+            }
+        }
+
         admins=MainActivity.getListaDeUsuarios().getAllAdmins();
-        adapterClientes=new ArrayAdapter<String>(this,R.layout.list_view_info,R.id.nameTextView,clientes);
+        adapterClientes=new ArrayAdapter<String>(this,R.layout.list_view_info,R.id.nameTextView,clientes2);
         adapterAdmins=new ArrayAdapter<String>(this,R.layout.list_view_info,R.id.nameTextView,admins);
+        if(userTypeSpinner.getSelectedItem().toString().equals("Clientes")){
+            usersListView.setAdapter(adapterClientes);
+        }else{
+            usersListView.setAdapter(adapterAdmins);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.administrar_usuarios_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getTitle().toString().equals("Agregar Administrador")) {
+            greyPanel4.setVisibility(View.VISIBLE);
+            Intent agregarAdminIntent = new Intent(getApplicationContext(), AgregarAdminPopUp.class);
+            startActivity(agregarAdminIntent);
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateList();
+
+        greyPanel4.setVisibility(View.INVISIBLE);
     }
 }

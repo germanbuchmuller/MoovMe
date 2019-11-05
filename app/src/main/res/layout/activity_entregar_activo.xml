@@ -85,9 +85,9 @@
         android:id="@+id/canjearPuntosCheckBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="60dp"
         android:text="Canjear puntos?"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,11 +98,29 @@
         android:id="@+id/pagarBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="Pagar"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/minutosTextView"
-        app:layout_constraintStart_toStartOf="@+id/minutosTextView"
+        app:layout_constraintEnd_toEndOf="@+id/siguienteButton"
+        app:layout_constraintStart_toStartOf="@+id/siguienteButton"
+        app:layout_constraintTop_toTopOf="@+id/siguienteButton" />
+
+    <Spinner
+        android:id="@+id/terminalAEntregarSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/canjearPuntosCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/canjearPuntosCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/entregarEnTerminalTextView" />
+
+    <TextView
+        android:id="@+id/entregarEnTerminalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entregar en terminal:"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/terminalAEntregarSpinner"
         app:layout_constraintTop_toBottomOf="@+id/precioTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,6 @@ public  class Activo {
     }
 
     public int getPuntos() {
-        return puntos;
+        return tipoDeActivo.getPuntos();
     }
 }

@@ -217,6 +217,10 @@ public class Zona {
         }
     }
 
+    public int getPuntajeCliente(Cliente cliente){
+        return clientesPuntajeParcial.get(cliente);
+    }
+
     public HashMap<Cliente, Integer> getRanking(){
         List<Map.Entry<Cliente, Integer> > lista = new LinkedList<Map.Entry<Cliente, Integer> >(clientesPuntajeTotal.entrySet());
         Collections.sort(lista, new Comparator<Map.Entry<Cliente, Integer> >() {

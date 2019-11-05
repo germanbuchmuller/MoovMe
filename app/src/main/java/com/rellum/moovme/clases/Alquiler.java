@@ -2,6 +2,9 @@ package com.rellum.moovme.clases;
 
 import com.rellum.moovme.MainActivity;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 public class Alquiler {
     private Cliente cliente;
     private Integer[]horaDeEmision;
@@ -51,20 +54,41 @@ public class Alquiler {
     }
 
     public int calcularTiempoDeAlquiler(Integer[] horaDeEntrega){
-        return (60*horaDeEntrega[0]-horaDeEmision[0])+(horaDeEntrega[1]-horaDeEmision[1]);
+        Calendar horaEntrega=Calendar.getInstance();
+        horaEntrega.set(Calendar.HOUR,horaDeEntrega[0]);
+        horaEntrega.set(Calendar.MINUTE,horaDeEntrega[1]);
+        Calendar horaEmision=Calendar.getInstance();
+        horaEmision.set(Calendar.HOUR,horaDeEmision[0]);
+        horaEmision.set(Calendar.MINUTE,horaDeEmision[1]);
+        long returnResult= TimeUnit.MILLISECONDS.toMinutes(horaEntrega.getTime().getTime()-horaEmision.getTime().getTime());
+        if (returnResult>0){
+            return (int)(returnResult);
+        }else {
+            return (int)(24*60+returnResult);
+        }
+
+    }
+
+    public Zona getZona() {
+        return zona;
     }
 
     public boolean isHoraDeEntregaEstimadaAcertada(Integer[] horaDeEntrega){
-        int minutosDeAlquiler=(60*horaDeEntrega[0]-horaDeEmision[0])+(horaDeEntrega[1]-horaDeEmision[1]);
-        int minutosDeAlquilerEstimados=(60*horaDeEntregaEstimada[0]-horaDeEmision[0])+(horaDeEntregaEstimada[1]-horaDeEmision[1]);
-        if (-5<=minutosDeAlquiler-minutosDeAlquilerEstimados || 5<=minutosDeAlquiler-minutosDeAlquilerEstimados){
+        Calendar horaEntrega=Calendar.getInstance();
+        horaEntrega.set(Calendar.HOUR,horaDeEntrega[0]);
+        horaEntrega.set(Calendar.MINUTE,horaDeEntrega[1]);
+        Calendar horaEmision=Calendar.getInstance();
+        horaEmision.set(Calendar.HOUR,horaDeEntregaEstimada[0]);
+        horaEmision.set(Calendar.MINUTE,horaDeEntregaEstimada[1]);
+        long returnResult= TimeUnit.MILLISECONDS.toMinutes(horaEntrega.getTime().getTime()-horaEmision.getTime().getTime());
+        if (returnResult<5 && returnResult>-5){
             return true;
         }else{
             return false;
         }
     }
 
-    public int getTotalAPagar(Integer[] horaDeEntrega ){
+    public double getTotalAPagar(Integer[] horaDeEntrega ){
         return (MainActivity.getTarifas().getPrice(activoAlquilado,zona))*calcularTiempoDeAlquiler(horaDeEntrega);
     }
 

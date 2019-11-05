@@ -6,25 +6,25 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Tarifario {
-    private HashMap<String, HashMap<TipoDeActivo,Integer>>lista;
+    private HashMap<String, HashMap<TipoDeActivo,Double>>lista;
     private HashSet<String>zonas;
 
     public Tarifario() {
-        lista=new HashMap<String, HashMap<TipoDeActivo, Integer>>();
+        lista=new HashMap<String, HashMap<TipoDeActivo, Double>>();
         zonas = new HashSet<String>();
 
     }
 
-    public void agregarTarifa(Activo activo, String zona, int precio){
+    public void agregarTarifa(Activo activo, String zona, double precio){
 
             if (!lista.keySet().contains(zona)) {
-                HashMap<TipoDeActivo, Integer> temp = new HashMap<TipoDeActivo, Integer>();
+                HashMap<TipoDeActivo, Double> temp = new HashMap<>();
                 temp.put(activo.getType(), precio);
                 lista.put(zona, temp);
                 zonas.add(zona);
             } else {
                 if (!lista.get(zona).containsKey(activo.getType())) {
-                    HashMap<TipoDeActivo, Integer> temp = lista.get(zona);
+                    HashMap<TipoDeActivo, Double> temp = lista.get(zona);
                     temp.put(activo.getType(), precio);
                     lista.put(zona, temp);
                 }else {
@@ -34,7 +34,7 @@ public class Tarifario {
 
     }
 
-    public void actualizarTarifa(Activo activo, String zona, int nuevoPrecio){
+    public void actualizarTarifa(Activo activo, String zona, double nuevoPrecio){
         if (lista.keySet().contains(zona)){
             if (lista.get(zona).keySet().contains(activo.getType())){
                 lista.get(zona).replace(activo.getType(),nuevoPrecio);
@@ -46,7 +46,7 @@ public class Tarifario {
         }
 
     }
-    public int getPrice(Activo activo, String zona){
+    public double getPrice(Activo activo, String zona){
         if (lista.keySet().contains(zona)){
             if (lista.get(zona).keySet().contains(activo.getType())){
                 return lista.get(zona).get(activo.getType());
@@ -55,7 +55,7 @@ public class Tarifario {
         throw new RuntimeException("Precio no encontrado");
     }
 
-    public int getPrice(TipoDeActivo tipoDeActivo, String zona){
+    public double getPrice(TipoDeActivo tipoDeActivo, String zona){
         if (lista.keySet().contains(zona)){
             if (lista.get(zona).keySet().contains(tipoDeActivo)){
                 return lista.get(zona).get(tipoDeActivo);
@@ -64,7 +64,7 @@ public class Tarifario {
         throw new RuntimeException("Precio no encontrado");
     }
 
-    public int getPrice(Activo activo, Zona zona){
+    public double getPrice(Activo activo, Zona zona){
         if (lista.keySet().contains(zona.getNombre())){
             if (lista.get(zona.getNombre()).keySet().contains(activo.getType())){
                 return lista.get(zona.getNombre()).get(activo.getType());
@@ -73,7 +73,7 @@ public class Tarifario {
         throw new RuntimeException("Precio no encontrado");
     }
 
-    public int getPrice(TipoDeActivo tipoDeActivo, Zona zona){
+    public double getPrice(TipoDeActivo tipoDeActivo, Zona zona){
         if (lista.keySet().contains(zona.getNombre())){
             if (lista.get(zona.getNombre()).keySet().contains(tipoDeActivo)){
                 return lista.get(zona.getNombre()).get(tipoDeActivo);

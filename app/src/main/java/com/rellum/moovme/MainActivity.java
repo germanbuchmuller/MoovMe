@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.rellum.moovme.clases.Admin;
 import com.rellum.moovme.clases.AdministradorDeZonas;
+import com.rellum.moovme.clases.Cliente;
 import com.rellum.moovme.clases.ListaDeUsuarios;
 import com.rellum.moovme.clases.OperadorDePuntaje;
 import com.rellum.moovme.clases.Tarifario;
@@ -74,9 +75,23 @@ public class MainActivity extends AppCompatActivity {
                                 Intent logInAsAdminIntent = new Intent(getApplicationContext(), AdminMenuActivity.class);
                                 startActivity(logInAsAdminIntent);
                             }else{
-                                loggedInUser=user;
-                                Intent logInAsAdminIntent = new Intent(getApplicationContext(), SeleccionarZonaClienteActivity.class);
-                                startActivity(logInAsAdminIntent);
+                                loggedInUser=(Cliente)user;
+                                Cliente cliente=(Cliente)user;
+                                if (!cliente.isBanned()) {
+                                    if (loggedInUser.getAlquiler() == null) {
+                                        Intent logInAsUserIntent = new Intent(getApplicationContext(), SeleccionarZonaClienteActivity.class);
+                                        startActivity(logInAsUserIntent);
+                                    } else {
+                                        setZonaActualDelCliente(loggedInUser.getAlquiler().getZona());
+                                        administradorDeZonas.ingresarClienteAZona((Cliente) getLoggedInUser(), getZonaActualDelCliente());
+                                        Intent logInAsUser2Intent = new Intent(getApplicationContext(), MenuClientesActivity.class);
+                                        startActivity(logInAsUser2Intent);
+                                    }
+                                }else {
+                                    Toast toast=Toast.makeText(getApplicationContext(),"Error: Usuario Baneado",Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+
                             }
                         }else{
                             Toast toast = Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT);

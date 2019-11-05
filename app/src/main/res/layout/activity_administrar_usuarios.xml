@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".AdministrarUsuariosActivity">
 
+    <View
+        android:id="@+id/greyPanel4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B3363636"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/_dynamic"
+        app:layout_constraintEnd_toEndOf="@+id/_dynamic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/userTypeSpinner"
         android:layout_width="0dp"
