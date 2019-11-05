@@ -1,5 +1,6 @@
 package com.rellum.moovme;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.rellum.moovme.clases.Tarifario;
@@ -44,8 +46,34 @@ public class AdministrarTarifasActivity extends AppCompatActivity {
                 tarifasListView.setVisibility(View.INVISIBLE);
             }
         });
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        tarifasListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                builder.setTitle("¿Eliminar zona?");
+                builder.setMessage("");
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
+                    public void onClick(DialogInterface dialog, int which) {
+                       MainActivity.administradorDeZonas.eliminarZona(stringList.get(position));
+                       updateListView();
+                       dialog.dismiss();
+                    }
+                });
 
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            }
+        });
     }
 
     public void updateListView(){

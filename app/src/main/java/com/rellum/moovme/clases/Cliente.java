@@ -11,5 +11,7 @@ public class Cliente extends Usuario {
         this.celular=numeroCelular;
     }
 
-
+    public String getAlias() {
+        return alias;
+    }
 }

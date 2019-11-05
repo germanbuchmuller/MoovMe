@@ -1,6 +1,7 @@
 package com.rellum.moovme.clases;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -120,5 +121,27 @@ public class ListaDeUsuarios {
             return listaDeClientesPorZona.get(zona.getNombre());
         }else
             throw new RuntimeException("Zona no encontrada");
+    }
+
+    public ArrayList<String> getAllClientes(){
+        ArrayList<String>returnValue=new ArrayList<>();
+        Iterator iterator=clientes.values().iterator();
+        while (iterator.hasNext()){
+            Cliente cliente=(Cliente)iterator.next();
+            returnValue.add(cliente.getUsername());
+        }
+        Collections.sort(returnValue);
+        return returnValue;
+    }
+
+    public ArrayList<String> getAllAdmins(){
+        ArrayList<String>returnValue=new ArrayList<>();
+        Iterator iterator=admins.values().iterator();
+        while (iterator.hasNext()){
+            Admin admin=(Admin)iterator.next();
+            returnValue.add(admin.getUsername());
+        }
+        Collections.sort(returnValue);
+        return returnValue;
     }
 }

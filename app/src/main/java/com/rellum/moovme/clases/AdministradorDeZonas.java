@@ -8,6 +8,7 @@ import java.util.Iterator;
 public class AdministradorDeZonas {
     private HashMap<String,Zona>zonas;
     private HashMap<Integer,Terminal>terminales;
+    private HashMap<String,Terminal>terminalesPorDireccion;
     private int lastIdTerminal;
     private int lastIdLote;
 
@@ -16,6 +17,7 @@ public class AdministradorDeZonas {
         terminales=new HashMap<>();
         lastIdLote=1;
         lastIdTerminal=1;
+        terminalesPorDireccion=new HashMap<>();
     }
 
     public void agregarZona(String nombreDeZona){
@@ -24,6 +26,14 @@ public class AdministradorDeZonas {
         }else{
             throw new RuntimeException("Zona ya existente");
         }
+    }
+
+    public void eliminarZona(Zona zona){
+        zonas.remove(zona.getNombre());
+    }
+
+    public void eliminarZona(String zona){
+        zonas.remove(zona);
     }
 
     public Zona getZona(String nombreDeZona){
@@ -40,6 +50,7 @@ public class AdministradorDeZonas {
                 lastIdTerminal+=1;
                 zona.agregarTerminal(lastIdTerminal,direccion);
                 terminales.put(lastIdTerminal,zona.getTerminal(lastIdTerminal));
+                terminalesPorDireccion.put(zona.getTerminal(lastIdTerminal).getDireccion(),zona.getTerminal((lastIdTerminal)));
             }else{
                 throw new RuntimeException("Terminal ya existente");
             }
@@ -55,6 +66,7 @@ public class AdministradorDeZonas {
                 lastIdTerminal+=1;
                 zonas.get(zona).agregarTerminal(lastIdTerminal,direccion);
                 terminales.put(lastIdTerminal,zonas.get(zona).getTerminal(lastIdTerminal));
+                terminalesPorDireccion.put(zonas.get(zona).getTerminal(lastIdTerminal).getDireccion(),zonas.get(zona).getTerminal(lastIdTerminal));
             }else{
                 throw new RuntimeException("Terminal ya existente");
             }
@@ -67,6 +79,14 @@ public class AdministradorDeZonas {
     public Terminal getTerminal(int idTerminal){
         if (terminales.containsKey(idTerminal)){
             return terminales.get(idTerminal);
+        }else{
+            throw new RuntimeException("Terminal no encontrada");
+        }
+    }
+
+    public Terminal getTerminal(String direccion){
+        if (terminalesPorDireccion.containsKey(direccion)){
+            return terminalesPorDireccion.get(direccion);
         }else{
             throw new RuntimeException("Terminal no encontrada");
         }
@@ -111,5 +131,28 @@ public class AdministradorDeZonas {
 
     public int getLastIdLote() {
         return lastIdLote;
+    }
+
+    public void ingresarClienteAZona(Cliente cliente, Zona zona){
+        Iterator iterator = zonas.values().iterator();
+        while (iterator.hasNext()){
+            Zona zona2=(Zona)iterator.next();
+            zona2.eliminarClienteDeZona(cliente);
+        }
+        zona.agregarClienteAZona(cliente);
+    }
+
+    public void ingresarClienteAZona(Cliente cliente, String zona){
+        Iterator iterator = zonas.values().iterator();
+        while (iterator.hasNext()){
+            Zona zona2=(Zona)iterator.next();
+            zona2.eliminarClienteDeZona(cliente);
+        }
+
+        zonas.get(zona).agregarClienteAZona(cliente);
+    }
+
+    public HashMap<Cliente,Integer> getRanking(Zona zona){
+        return zona.getRanking();
     }
 }

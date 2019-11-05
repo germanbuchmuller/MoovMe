@@ -14,8 +14,10 @@ import com.rellum.moovme.clases.Admin;
 import com.rellum.moovme.clases.AdministradorDeZonas;
 import com.rellum.moovme.clases.ListaDeUsuarios;
 import com.rellum.moovme.clases.Tarifario;
+import com.rellum.moovme.clases.Terminal;
 import com.rellum.moovme.clases.TipoDeActivo;
 import com.rellum.moovme.clases.Usuario;
+import com.rellum.moovme.clases.Zona;
 
 import java.util.HashMap;
 
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private static Tarifario tarifas;
     public static HashMap<String,TipoDeActivo>tiposDeActivo;
     public static AdministradorDeZonas administradorDeZonas;
+    private static Zona zonaActualDelCliente;
+    private static Terminal termialActualDelCliente;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(logInAsAdminIntent);
                             }else{
                                 loggedInUser=user;
-                                Toast toast = Toast.makeText(getApplicationContext(), "Ingresado como cliente", Toast.LENGTH_SHORT);
-                                toast.show();
+                                Intent logInAsAdminIntent = new Intent(getApplicationContext(), SeleccionarZonaClienteActivity.class);
+                                startActivity(logInAsAdminIntent);
                             }
                         }else{
                             Toast toast = Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT);
@@ -109,5 +114,19 @@ public class MainActivity extends AppCompatActivity {
         tarifas=newTarifas;
     }
 
+    public static Zona getZonaActualDelCliente() {
+        return zonaActualDelCliente;
+    }
 
+    public static void setZonaActualDelCliente(Zona zonaActualDelCliente) {
+        MainActivity.zonaActualDelCliente = zonaActualDelCliente;
+    }
+
+    public static Terminal getTermialActualDelCliente() {
+        return termialActualDelCliente;
+    }
+
+    public static void setTermialActualDelCliente(Terminal termialActualDelCliente) {
+        MainActivity.termialActualDelCliente = termialActualDelCliente;
+    }
 }

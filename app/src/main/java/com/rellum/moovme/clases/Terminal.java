@@ -1,6 +1,8 @@
 package com.rellum.moovme.clases;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Terminal {
     private int idTerminal;
@@ -58,5 +60,19 @@ public class Terminal {
 
     public int getCantidadDeActivosDisponibles(){
         return activos.size();
+    }
+
+    public ArrayList<TipoDeActivo> getTiposDeActivoDisponible(){
+        HashSet<TipoDeActivo>tiposDeActivo=new HashSet<>();
+        for (Activo activo : activos) {
+            tiposDeActivo.add(activo.getType());
+        }
+        ArrayList<TipoDeActivo>returnResult=new ArrayList<>();
+        Iterator iterator=tiposDeActivo.iterator();
+        while (iterator.hasNext()){
+            returnResult.add((TipoDeActivo) iterator.next());
+        }
+
+        return returnResult;
     }
 }
