@@ -43,11 +43,12 @@ public class AdministradorDeZonas {
             throw new RuntimeException("Zona no encontrada");
         }
     }
-
+//le pasas una zona y una direccion y lo va agregando a la lista
     public void agregarTerminal(Zona zona,String direccion){
         if (zonas.containsValue(zona)){
             if (zona.containsTerminal(direccion)==false){
                 lastIdTerminal+=1;
+                // va haciendo que cada terminal tenga el id uno mas grande que el anterior
                 zona.agregarTerminal(lastIdTerminal,direccion);
                 terminales.put(lastIdTerminal,zona.getTerminal(lastIdTerminal));
                 terminalesPorDireccion.put(zona.getTerminal(lastIdTerminal).getDireccion(),zona.getTerminal((lastIdTerminal)));
@@ -100,7 +101,7 @@ public class AdministradorDeZonas {
     public void entregarLoteDeActivos(LoteDeActivos loteDeActivos, String zona){
         zonas.get(zona).entregarLoteDeActivos(loteDeActivos);
     }
-
+// devuelve las zonas en una lista de strings, para la aplicacion
     public ArrayList<String> getZonasListToString(){
         ArrayList<String>result=new ArrayList<>();
         Iterator<Zona> iterator = zonas.values().iterator();
@@ -111,7 +112,7 @@ public class AdministradorDeZonas {
         Collections.sort(result);
         return result;
     }
-
+//le pasas una zona y te devuelve la lista de las direcciones de las terminales
     public ArrayList<String> getDireccionTerminalesListByZona(String nombreZona){
         if (zonas.containsKey(nombreZona)){
             Zona zona = zonas.get(nombreZona);
@@ -132,14 +133,16 @@ public class AdministradorDeZonas {
     public int getLastIdLote() {
         return lastIdLote;
     }
-
+//mete el cliente que le pasas a la zona que le pasas, y sacan al cliente de las otras zonas donde estaba
     public void ingresarClienteAZona(Cliente cliente, Zona zona){
         Iterator iterator = zonas.values().iterator();
         while (iterator.hasNext()){
             Zona zona2=(Zona)iterator.next();
             zona2.eliminarClienteDeZona(cliente);
+            //esto saca a los clientes de las otras zonas
         }
         zona.agregarClienteAZona(cliente);
+        //despues de eliminarlo lo mete a la zona que le pedis
     }
 
     public void ingresarClienteAZona(Cliente cliente, String zona){

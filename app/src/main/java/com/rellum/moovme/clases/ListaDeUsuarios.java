@@ -1,5 +1,5 @@
 package com.rellum.moovme.clases;
-
+// tienen la lista de todos los usuarios, admins y clientes
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

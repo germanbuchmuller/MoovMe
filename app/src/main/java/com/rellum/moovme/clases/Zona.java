@@ -15,6 +15,7 @@ public class Zona {
     private HashMap<Integer,Terminal>terminales;
     private ArrayList<Integer>terminalesId;
     private HashMap<String, Cliente> clientesEnZona;
+    private ArrayList<Cliente>clientesBaneados;
     private HashMap<Cliente,Integer>clientesPuntajeTotal;
     private HashMap<Cliente,Integer>clientesPuntajeParcial;
 
@@ -25,19 +26,34 @@ public class Zona {
         this.clientesEnZona = new HashMap<String, Cliente>();
         this.clientesPuntajeTotal= new HashMap<>();
         this.clientesPuntajeParcial= new HashMap<>();
+        this.clientesBaneados=new ArrayList<>();
     }
 
     public void agregarTerminal(int idTerminal, String direccion){
+        // le pasas un id y una direccion para que cree la terminal
         if (!terminales.containsKey(idTerminal)){
             terminales.put(idTerminal,new Terminal(idTerminal,direccion));
             terminalesId.add(idTerminal);
         }else{
             throw new RuntimeException("Terminal ya existente");
+            //si la terminal ya existe, te tira un error
         }
     }
-
-    
-
+//no se usa
+    //mete un tipo de activos en una terminal
+    public void agregarActivosALaTerminal(Terminal terminal, ArrayList<Activo>activos){
+        if (terminales.containsValue(terminal)){
+            for (int i = 0; i < activos.size(); i++) {
+                terminal.agregarActivo(activos.get(i));
+            }
+            terminales.replace(terminal.getIdTerminal(),terminal);
+        }else{
+            throw new RuntimeException("No existe dicha terminal en esta zona");
+        }
+    }
+/* le pasas un cleinte y si el cliente nunca entro a la zona, tiene 0 pts parciales y totales
+   Los puntos son por zona
+    */
     public void agregarClienteAZona(Cliente cliente){
         clientesEnZona.put(cliente.username,cliente);
         if (!clientesPuntajeTotal.containsKey(cliente)){
@@ -114,7 +130,7 @@ public class Zona {
         }
         return result;
     }
-
+//devuelve la lista de terminales en string
     public ArrayList<String> getTerminalesList(){
         ArrayList<String>result=new ArrayList<String>();
         Iterator<Terminal> iterator = terminales.values().iterator();
@@ -142,9 +158,11 @@ public class Zona {
 
     public void entregarLoteDeActivos(LoteDeActivos loteDeActivos) {
         if (terminales.size()>0) {
+            //si hay activos disponibles, los reparte
             while (loteDeActivos.getActivos().size() > 0) {
                 for (int i = 0; i < terminales.size(); i++) {
                     if (loteDeActivos.getActivos().size() > 0) {
+                        //aca se meten todas las terminales en un hashmap
                         terminales.get(terminalesId.get(i)).agregarActivos(loteDeActivos.getActivosPorCantidad(1));
                     } else {
                         break;
@@ -155,7 +173,7 @@ public class Zona {
             throw new RuntimeException("La zona no contiene terminales");
         }
     }
-
+//devuelve si existe la terminal
     public boolean containsTerminal(Terminal terminal){
         if (terminales.containsValue(terminal)){
             return true;
@@ -205,11 +223,11 @@ public class Zona {
             throw new RuntimeException("Usuario no registrado en esta zona");
         }
     }
-
+  // devuelve el puntaje parcial, el total solo se usa para ordenar en el ranking
     public int getPuntajeCliente(Cliente cliente){
         return clientesPuntajeParcial.get(cliente);
     }
-
+//ordena los puntajes por orden descendente
     public HashMap<Cliente, Integer> getRanking(){
         List<Map.Entry<Cliente, Integer> > lista = new LinkedList<Map.Entry<Cliente, Integer> >(clientesPuntajeTotal.entrySet());
         Collections.sort(lista, new Comparator<Map.Entry<Cliente, Integer> >() {

@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 public class OperadorDePuntaje {
     private HashMap<Zona,HashMap<TipoDeActivo,Integer[]>>puntaje;
-
+/*el hashamp puntaje. en cada zona, a cada tipo de activo le corresponde una cantidad de ptos a canjear
+para obtener un determinado descuento
+   */
     public OperadorDePuntaje() {
         puntaje=new HashMap<>();
     }

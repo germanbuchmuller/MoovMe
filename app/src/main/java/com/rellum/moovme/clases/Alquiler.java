@@ -52,7 +52,8 @@ public class Alquiler {
     public Activo getActivoAlquilado() {
         return activoAlquilado;
     }
-
+/*se le pasa la hora de entrega, porque ya sabe la hora de alquiler(hora de emisison)
+    y hace todos los calculos para ver a que hora hay que pagar*/
     public int calcularTiempoDeAlquiler(Integer[] horaDeEntrega){
         Calendar horaEntrega=Calendar.getInstance();
         horaEntrega.set(Calendar.HOUR,horaDeEntrega[0]);
@@ -87,11 +88,13 @@ public class Alquiler {
             return false;
         }
     }
-
+/*le pasas la hora de entrega y te devuelve el precio*/
     public double getTotalAPagar(Integer[] horaDeEntrega ){
         return (MainActivity.getTarifas().getPrice(activoAlquilado,zona))*calcularTiempoDeAlquiler(horaDeEntrega);
     }
-
+/*se fija si la hora estimada coincide, si coincide multiplica los puntos que te da el activo por 1.2
+y si no, devuelve el puntaje
+ */
     public int getPuntaje(Integer[] horaDeEntrega){
         if (isHoraDeEntregaEstimadaAcertada(horaDeEntrega)){
             return  (int)(activoAlquilado.getType().getPuntos()*1.2);

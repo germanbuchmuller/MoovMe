@@ -1,5 +1,5 @@
 package com.rellum.moovme.clases;
-
+//te dice cuanto vale un activo en una zona
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,9 +14,8 @@ public class Tarifario {
         zonas = new HashSet<String>();
 
     }
-
+//crea un hashmap que tiene el tipo de activo y el valor
     public void agregarTarifa(Activo activo, String zona, double precio){
-
             if (!lista.keySet().contains(zona)) {
                 HashMap<TipoDeActivo, Double> temp = new HashMap<>();
                 temp.put(activo.getType(), precio);
@@ -46,6 +45,7 @@ public class Tarifario {
         }
 
     }
+    //devuelve el precio por mimnuto de activo en una zona
     public double getPrice(Activo activo, String zona){
         if (lista.keySet().contains(zona)){
             if (lista.get(zona).keySet().contains(activo.getType())){

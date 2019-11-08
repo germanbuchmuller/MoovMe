@@ -1,5 +1,5 @@
 package com.rellum.moovme.clases;
-
+//tienen tipos de activo ej:"moto"
 public  class Activo {
     private TipoDeActivo tipoDeActivo;
     private int puntos;
@@ -21,5 +21,6 @@ public  class Activo {
 
     public int getPuntos() {
         return tipoDeActivo.getPuntos();
+    //devuelve la cantidad de puntos que da cada activo
     }
 }

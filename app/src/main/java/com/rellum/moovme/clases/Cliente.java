@@ -1,7 +1,7 @@
 package com.rellum.moovme.clases;
-
+//otro de los tipos de ususario
 public class Cliente extends Usuario {
-
+// tiene un alias, un celular y la posibilidad de estar baneado
     protected String alias;
     protected int celular;
     private boolean banned;

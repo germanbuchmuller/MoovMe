@@ -1,6 +1,6 @@
 package com.rellum.moovme.clases;
-
-public abstract class Usuario {
+//maneja los tipos de cuenta
+  public abstract class Usuario {
     protected String fullname;
     protected String username;
     protected String password;

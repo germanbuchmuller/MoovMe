@@ -16,6 +16,7 @@ public class Terminal {
     }
 
     public void agregarActivo(Activo unActivo){
+        //le pasas un activo y lo agrega a la lista
         activos.add(unActivo);
     }
 
@@ -30,10 +31,12 @@ public class Terminal {
     }
 
     public Activo getActivo(TipoDeActivo tipoDeActivo){
+        //le pasas que tipo de activo queres, y si lo tiene te lo devuelve
         for (int i = 0; i < activos.size(); i++) {
             if (activos.get(i).getType().equals(tipoDeActivo)){
                 Activo returnActivo = activos.get(i);
                 activos.remove(i);
+                //una vez que sale la moto, se la saca de la lista
                 return returnActivo;
             }
         }
@@ -53,6 +56,7 @@ public class Terminal {
         for (int i = 0; i < activos.size(); i++) {
             if (activos.get(i).getType().equals(tipoDeActivo)){
                 result+=1;
+                //cuenta cuantos activos hay de un tipo
             }
         }
         return result;
