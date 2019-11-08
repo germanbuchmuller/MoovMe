@@ -15,7 +15,6 @@ public class Zona {
     private HashMap<Integer,Terminal>terminales;
     private ArrayList<Integer>terminalesId;
     private HashMap<String, Cliente> clientesEnZona;
-    private ArrayList<Cliente>clientesBaneados;
     private HashMap<Cliente,Integer>clientesPuntajeTotal;
     private HashMap<Cliente,Integer>clientesPuntajeParcial;
 
@@ -26,7 +25,6 @@ public class Zona {
         this.clientesEnZona = new HashMap<String, Cliente>();
         this.clientesPuntajeTotal= new HashMap<>();
         this.clientesPuntajeParcial= new HashMap<>();
-        this.clientesBaneados=new ArrayList<>();
     }
 
     public void agregarTerminal(int idTerminal, String direccion){
@@ -38,16 +36,7 @@ public class Zona {
         }
     }
 
-    public void agregarActivosALaTerminal(Terminal terminal, ArrayList<Activo>activos){
-        if (terminales.containsValue(terminal)){
-            for (int i = 0; i < activos.size(); i++) {
-                terminal.agregarActivo(activos.get(i));
-            }
-            terminales.replace(terminal.getIdTerminal(),terminal);
-        }else{
-            throw new RuntimeException("No existe dicha terminal en esta zona");
-        }
-    }
+    
 
     public void agregarClienteAZona(Cliente cliente){
         clientesEnZona.put(cliente.username,cliente);

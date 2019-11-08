@@ -12,16 +12,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.rellum.moovme.clases.Activo;
 import com.rellum.moovme.clases.Alquiler;
 import com.rellum.moovme.clases.Cliente;
 import com.rellum.moovme.clases.Terminal;
-import com.rellum.moovme.clases.TipoDeActivo;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EntregarActivoPopUp extends AppCompatActivity {
     private TextView horaDeEntregaTextView;
@@ -158,7 +157,15 @@ public class EntregarActivoPopUp extends AppCompatActivity {
     }
 
     private Integer[] getPuntajeACanjear(){
-        return MainActivity.getOperadorDePuntaje().getPuntaje(MainActivity.getZonaActualDelCliente(),getActivoAlquilado().getType());
+        try{
+            return MainActivity.getOperadorDePuntaje().getPuntaje(MainActivity.getZonaActualDelCliente(),getActivoAlquilado().getType());
+        }catch (Exception exception){
+            Integer[]returnValue=new Integer[2];
+            returnValue[0]=0;
+            returnValue[1]=0;
+            return returnValue;
+        }
+
     }
 
     private Activo getActivoAlquilado(){

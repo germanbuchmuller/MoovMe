@@ -81,7 +81,7 @@ public class Alquiler {
         horaEmision.set(Calendar.HOUR,horaDeEntregaEstimada[0]);
         horaEmision.set(Calendar.MINUTE,horaDeEntregaEstimada[1]);
         long returnResult= TimeUnit.MILLISECONDS.toMinutes(horaEntrega.getTime().getTime()-horaEmision.getTime().getTime());
-        if (returnResult<5 && returnResult>-5){
+        if (returnResult<=5 && returnResult>=-5){
             return true;
         }else{
             return false;

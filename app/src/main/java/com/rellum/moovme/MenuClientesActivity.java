@@ -64,7 +64,7 @@ public class MenuClientesActivity extends AppCompatActivity {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             activosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
 
                     builder.setTitle("¿Deseas alquilar un/una "+activosDisponibles.get(position).toString()+"?");
                     builder.setMessage("");
@@ -150,7 +150,6 @@ public class MenuClientesActivity extends AppCompatActivity {
             try{
                 tempActivos.add(activosDisponible.toString()+"   "+"$"+MainActivity.getTarifas().getPrice(activosDisponible,MainActivity.getZonaActualDelCliente())+"/minuto");
             }catch (RuntimeException exception){
-                tempActivos.add(activosDisponible.toString()+"   "+"$-");
             }
 
         }
@@ -172,7 +171,7 @@ public class MenuClientesActivity extends AppCompatActivity {
             rankingTextView.setVisibility(View.VISIBLE);
             activoTextView.setVisibility(View.VISIBLE);
             entregarActivoBtn.setVisibility(View.INVISIBLE);
-            setTitle("Bienvenido, "+MainActivity.getLoggedInUser().getFullname()+"        Puntos: "+MainActivity.getZonaActualDelCliente().getPuntajeCliente((Cliente) MainActivity.getLoggedInUser()));
+            setTitle("Bienvenido, "+MainActivity.getLoggedInUser().getFullname()+"    Puntos: "+MainActivity.getZonaActualDelCliente().getPuntajeCliente((Cliente) MainActivity.getLoggedInUser()));
         }else{
             rankingListView.setVisibility(View.INVISIBLE);
             activosListView.setVisibility(View.INVISIBLE);

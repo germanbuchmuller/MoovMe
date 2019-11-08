@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Tarifario {
-    private HashMap<String, HashMap<TipoDeActivo,Double>>lista;
+    private HashMap<String,HashMap<TipoDeActivo,Double>>lista;
     private HashSet<String>zonas;
 
     public Tarifario() {
