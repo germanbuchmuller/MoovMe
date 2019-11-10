@@ -50,7 +50,7 @@ public class ListaDeUsuarios {
             throw new RuntimeException("Usuario ya registrado");
         }
     }
-
+//le pasas un username y te devuelve el usuario guardado en el hashmap con ese username
     public Usuario getUserByUsername(String username){
         if(clientes.keySet().contains(username)){
             return clientes.get(username);

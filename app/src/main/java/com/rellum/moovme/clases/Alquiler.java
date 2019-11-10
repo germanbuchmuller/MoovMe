@@ -62,6 +62,7 @@ public class Alquiler {
         horaEmision.set(Calendar.HOUR,horaDeEmision[0]);
         horaEmision.set(Calendar.MINUTE,horaDeEmision[1]);
         long returnResult= TimeUnit.MILLISECONDS.toMinutes(horaEntrega.getTime().getTime()-horaEmision.getTime().getTime());
+        //hace la resta y te devuelve la diferencia de tiempo en milisegundos
         if (returnResult>0){
             return (int)(returnResult);
         }else {

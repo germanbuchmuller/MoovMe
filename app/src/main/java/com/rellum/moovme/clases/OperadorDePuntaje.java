@@ -14,7 +14,7 @@ para obtener un determinado descuento
     }
 
     public void agregarPuntaje(Zona zona, TipoDeActivo tipoDeActivo, int puntos, int descuento){
-        if (puntaje.containsKey(zona)){
+            if (puntaje.containsKey(zona)){
             HashMap<TipoDeActivo,Integer[]>puntajeValue;
             if (puntaje.get(zona)!=null){
                puntajeValue =puntaje.get(zona);

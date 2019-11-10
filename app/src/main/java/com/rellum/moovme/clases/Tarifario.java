@@ -54,7 +54,7 @@ public class Tarifario {
         }
         throw new RuntimeException("Precio no encontrado");
     }
-
+//le pasas eso y devuelve el precio por minuto
     public double getPrice(TipoDeActivo tipoDeActivo, String zona){
         if (lista.keySet().contains(zona)){
             if (lista.get(zona).keySet().contains(tipoDeActivo)){
@@ -81,7 +81,7 @@ public class Tarifario {
         }
         throw new RuntimeException("Precio no encontrado");
     }
-
+//se devuelve un tipo string, porque mas adealante se necesita en tipo string
     public ArrayList<String> getZonasList(){
         ArrayList<String>returnResult=new ArrayList<String >();
         Iterator value = this.zonas.iterator();

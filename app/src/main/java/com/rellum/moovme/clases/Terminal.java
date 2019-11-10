@@ -19,7 +19,7 @@ public class Terminal {
         //le pasas un activo y lo agrega a la lista
         activos.add(unActivo);
     }
-
+//para agregar varios activos a la vez
     public void agregarActivos(ArrayList<Activo> activosAAgregar){
         for (int i = 0; i < activosAAgregar.size(); i++) {
             activos.add(activosAAgregar.get(i));
@@ -50,7 +50,7 @@ public class Terminal {
     public String getDireccion() {
         return direccion;
     }
-
+//le pedis cuantos activos tiene de un tipo y los cuenta de a uno
     public int getCantidadDeActivosDisponibles(TipoDeActivo tipoDeActivo){
         int result=0;
         for (int i = 0; i < activos.size(); i++) {
@@ -61,7 +61,7 @@ public class Terminal {
         }
         return result;
     }
-
+// devuelve la cantidad total de activos que hay en una terminal
     public int getCantidadDeActivosDisponibles(){
         return activos.size();
     }

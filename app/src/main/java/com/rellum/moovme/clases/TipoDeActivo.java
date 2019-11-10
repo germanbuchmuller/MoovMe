@@ -1,5 +1,4 @@
 package com.rellum.moovme.clases;
-//
 public class TipoDeActivo {
     private String tipoDeActivo="";
     private int puntos;

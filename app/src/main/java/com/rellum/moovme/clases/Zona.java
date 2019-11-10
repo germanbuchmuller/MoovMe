@@ -65,6 +65,7 @@ public class Zona {
     public void eliminarClienteDeZona(Cliente cliente){
         clientesEnZona.remove(cliente.username);
     }
+    //le pasas el cliente a eliminar, por username
     public void eliminarClienteDeZona(String cliente){
         clientesEnZona.remove(cliente);
     }

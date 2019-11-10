@@ -8,6 +8,7 @@ public class Cliente extends Usuario {
 
     public Cliente(String fullname, String alias, String username, String password, int numeroCelular) {
         super(fullname, username, password);
+        //llama al constructor de usuario
         this.alias=alias;
         this.celular=numeroCelular;
         banned=false;
