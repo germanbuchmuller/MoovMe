@@ -65,31 +65,35 @@ public class MenuClientesActivity extends AppCompatActivity {
             activosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
+                    if (activosDisponibles.size()>0) {
+                        if (!activosDisponibles.get(position).toString().equals("No hay activos disponibles en esta terminal")) {
 
-                    builder.setTitle("¿Deseas alquilar un/una "+activosDisponibles.get(position).toString()+"?");
-                    builder.setMessage("");
+                            builder.setTitle("¿Deseas alquilar un/una " + activosDisponibles.get(position).toString() + "?");
+                            builder.setMessage("");
 
-                    builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
-                        public void onClick(DialogInterface dialog, int which) {
-                            greyPanel3.setVisibility(View.VISIBLE);
-                            tipoDeActivoSeleccionado=activosDisponibles.get(position);
-                            Intent menuClienteIntent=new Intent(getApplicationContext(),EstablecerHoraDeEntregaPopUp.class);
-                            startActivity(menuClienteIntent);
-                            dialog.dismiss();
+                                public void onClick(DialogInterface dialog, int which) {
+                                    greyPanel3.setVisibility(View.VISIBLE);
+                                    tipoDeActivoSeleccionado = activosDisponibles.get(position);
+                                    Intent menuClienteIntent = new Intent(getApplicationContext(), EstablecerHoraDeEntregaPopUp.class);
+                                    startActivity(menuClienteIntent);
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            AlertDialog alert = builder.create();
+                            alert.show();
                         }
-                    });
-
-                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                    }
                 }
             });
 

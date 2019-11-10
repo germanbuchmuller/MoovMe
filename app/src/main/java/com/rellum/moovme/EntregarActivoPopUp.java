@@ -80,7 +80,9 @@ public class EntregarActivoPopUp extends AppCompatActivity {
 
                         long precioAPagar=calcularPrecioAPagar();
                         precioTextView.setText("Precio: $"+precioAPagar);
-                        canjearPuntosCheckBox.setText("¿Canjear "+getPuntajeACanjear()[0]+" puntos para obtener %"+getPuntajeACanjear()[1]+" de descuento?");
+
+
+
                         if (getPuntosDelCliente()>=getPuntajeACanjear()[0]){
                             canjearPuntosCheckBox.setEnabled(true);
                         }else{
@@ -97,7 +99,11 @@ public class EntregarActivoPopUp extends AppCompatActivity {
                         entregarEnTerminalTextView.setVisibility(View.VISIBLE);
                         terminalAEntregarSpinner.setVisibility(View.VISIBLE);
                         minutosTextView.setText("Minutos utilizado: "+getMinutosUtilizado());
-
+                        if (getPuntajeACanjear()[0]!=0){
+                            canjearPuntosCheckBox.setText("¿Canjear "+getPuntajeACanjear()[0]+" puntos para obtener %"+getPuntajeACanjear()[1]+" de descuento?");
+                        }else{
+                            canjearPuntosCheckBox.setVisibility(View.INVISIBLE);
+                        }
 
 
                     }else{

@@ -61,6 +61,8 @@ public class AgregarPuntajePopUp extends AppCompatActivity {
                     int puntaje=Integer.parseInt(puntajeEditText.getText().toString());
                     int descuento=Integer.parseInt(descuentoEditText.getText().toString());
                     MainActivity.getOperadorDePuntaje().agregarPuntaje(zonaSelected,activoSelected,puntaje,descuento);
+                    Toast toast=Toast.makeText(getApplicationContext(),"Puntaje agregado con éxito",Toast.LENGTH_SHORT);
+                    toast.show();
                     finish();
                 }else{
                     Toast toast=Toast.makeText(getApplicationContext(),"Ingrese datos válidos",Toast.LENGTH_LONG);

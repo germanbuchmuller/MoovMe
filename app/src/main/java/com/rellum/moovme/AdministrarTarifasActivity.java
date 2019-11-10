@@ -39,13 +39,7 @@ public class AdministrarTarifasActivity extends AppCompatActivity {
         greyPanel2=(View)findViewById(R.id.greyPanel2);
         updateListView();
 
-        tarifasListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedZona=view.toString();
-                tarifasListView.setVisibility(View.INVISIBLE);
-            }
-        });
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         tarifasListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

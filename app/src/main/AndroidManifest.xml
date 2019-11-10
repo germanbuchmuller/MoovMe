@@ -3,46 +3,63 @@
     package="com.rellum.moovme">
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AgregarAdminPopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".EntregarActivoPopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".AgregarPuntajePopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".EstablecerHoraDeEntregaPopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".MenuClientesActivity" />
-        <activity android:name=".SeleccionarZonaClienteActivity" />
-        <activity android:name=".AdministrarUsuariosActivity" />
+        <activity android:name=".MenuClientesActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SeleccionarZonaClienteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AdministrarUsuariosActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CrearTerminalPopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".CrearZonaPopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".ComprarLoteActivosPopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".CrearActivoPopUp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".AdministrarActivosActivity" />
         <activity
             android:name=".AgregarTarifaActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".AdministrarTarifasActivity" />
-        <activity android:name=".AdminMenuActivity" />
-        <activity android:name=".RegistrarClienteActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".AdministrarTarifasActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AdminMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegistrarClienteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
