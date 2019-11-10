@@ -159,6 +159,7 @@ public class MenuClientesActivity extends AppCompatActivity {
         }
         if (tempActivos.size()==0){
             tempActivos.add("No hay activos disponibles en esta terminal");
+            activosDisponibles.clear();
         }
         activosAdapter=new ArrayAdapter<String>(this,R.layout.list_view_info,R.id.nameTextView,tempActivos);
         activosListView.setAdapter(activosAdapter);
