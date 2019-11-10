@@ -2,17 +2,10 @@ package com.rellum.moovme.clases;
 //tienen tipos de activo ej:"moto"
 public  class Activo {
     private TipoDeActivo tipoDeActivo;
-    private int puntos;
 
-
-
-    public Activo(TipoDeActivo tipoDeActivo, int puntos) {
+    public Activo(TipoDeActivo tipoDeActivo) {
         this.tipoDeActivo = tipoDeActivo;
-        this.puntos=puntos;
-    }
 
-    public void actualizarPuntaje(int puntosNuevos){
-        this.puntos=puntosNuevos;
     }
 
     public TipoDeActivo getType() {

@@ -9,9 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.rellum.moovme.clases.Activo;
 import com.rellum.moovme.clases.Tarifario;
 import com.rellum.moovme.clases.TipoDeActivo;
@@ -19,6 +16,9 @@ import com.rellum.moovme.clases.TipoDeActivo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AgregarTarifaActivity extends AppCompatActivity {
     private Tarifario tarifas;
@@ -72,7 +72,7 @@ public class AgregarTarifaActivity extends AppCompatActivity {
                     if (activoSpinner.getSelectedItem()!=null){
                         if (precioEditText.getText().toString().length()>0){
                             try {
-                                Activo unActivo = new Activo(MainActivity.tiposDeActivo.get(activoSpinner.getSelectedItem().toString()),0);
+                                Activo unActivo = new Activo(MainActivity.tiposDeActivo.get(activoSpinner.getSelectedItem().toString()));
                                 tarifas.agregarTarifa(unActivo,zonaSpinner2.getSelectedItem().toString(),Double.parseDouble(precioEditText.getText().toString()));
                                 Toast toast4=Toast.makeText(getApplicationContext(),"Tarifa creada con éxito",Toast.LENGTH_SHORT);
                                 toast4.show();

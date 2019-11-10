@@ -9,9 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.rellum.moovme.clases.Activo;
 import com.rellum.moovme.clases.LoteDeActivos;
 import com.rellum.moovme.clases.TipoDeActivo;
@@ -19,6 +16,9 @@ import com.rellum.moovme.clases.TipoDeActivo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ComprarLoteActivosPopUp extends AppCompatActivity {
     private Spinner tipoDeActivoSpinner;
@@ -82,7 +82,7 @@ public class ComprarLoteActivosPopUp extends AppCompatActivity {
                                     TipoDeActivo tipoDeActivo=MainActivity.tiposDeActivo.get(tipoDeActivoSeleccionado);
                                     ArrayList<Activo> activosAEntregar=new ArrayList<Activo>();
                                     for (int i = 0; i < cantidadDeActivosSeleccionada; i++) {
-                                        Activo temp=new Activo(tipoDeActivo,0);
+                                        Activo temp=new Activo(tipoDeActivo);
                                         activosAEntregar.add(temp);
                                     }
 
