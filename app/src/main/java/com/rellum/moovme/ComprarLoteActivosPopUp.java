@@ -86,7 +86,7 @@ public class ComprarLoteActivosPopUp extends AppCompatActivity {
                                         activosAEntregar.add(temp);
                                     }
 
-                                    LoteDeActivos loteDeActivosAEntregar = new LoteDeActivos((lastIdLote+1),activosAEntregar,zonaSeleccionada);
+                                    LoteDeActivos loteDeActivosAEntregar = new LoteDeActivos((lastIdLote+1),activosAEntregar);
                                     MainActivity.administradorDeZonas.entregarLoteDeActivos(loteDeActivosAEntregar,zonaSeleccionada);
 
                                     Toast toast = Toast.makeText(getApplicationContext(), "Lote entregado a la zona: "+zonaSeleccionada, Toast.LENGTH_SHORT);

@@ -5,12 +5,11 @@ import java.util.ArrayList;
 public class LoteDeActivos {
     private int codigoDeLote;
     private ArrayList<Activo>activos;
-    private String zonaDeEntrega;
 
-    public LoteDeActivos(int codigoDeLote, ArrayList<Activo> activos, String zonaDeEntrega) {
+
+    public LoteDeActivos(int codigoDeLote, ArrayList<Activo> activos) {
         this.codigoDeLote = codigoDeLote;
         this.activos = activos;
-        this.zonaDeEntrega=zonaDeEntrega;
     }
 
     public int getCodigoDeLote() {
@@ -34,8 +33,5 @@ public class LoteDeActivos {
         }else{
             throw new RuntimeException("Cantidad de activos insuficiente");
         }
-    }
-    public String getZonaDeEntrega(){
-        return zonaDeEntrega;
     }
 }
