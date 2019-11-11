@@ -40,7 +40,7 @@ public class AgregarAdminPopUp extends AppCompatActivity {
             public void onClick(View v) {
                 if (adminPasswordEditText.getText().toString().length()>0 && adminUsernameEditText.getText().toString().length()>0 && fullnameEditText.getText().toString().length()>0){
                     try{
-                        MainActivity.getListaDeUsuarios().agregarAdmin(fullnameEditText.getText().toString(),adminUsernameEditText.getText().toString(),adminPasswordEditText.getText().toString());
+                        MainActivity.getAdministradorDeUsuarios().agregarAdmin(fullnameEditText.getText().toString(),adminUsernameEditText.getText().toString(),adminPasswordEditText.getText().toString());
                         Toast toast=Toast.makeText(getApplicationContext(),"Administrador agregado con éxito",Toast.LENGTH_SHORT);
                         toast.show();
                         finish();

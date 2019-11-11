@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.rellum.moovme.clases.Admin;
 import com.rellum.moovme.clases.Cliente;
 
 import java.util.ArrayList;
@@ -83,10 +82,10 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int which) {
                         if (userTypeSpinner.getSelectedItem().toString().equals("Clientes")){
-                            MainActivity.getListaDeUsuarios().deleteUserByUsername(clientes.get(pos));
+                            MainActivity.getAdministradorDeUsuarios().deleteUserByUsername(clientes.get(pos));
                         }else{
                             if (!admins.get(pos).equals("admin")){
-                                MainActivity.getListaDeUsuarios().deleteUserByUsername(admins.get(pos));
+                                MainActivity.getAdministradorDeUsuarios().deleteUserByUsername(admins.get(pos));
                             }else{
                                 Toast toast=Toast.makeText(getApplicationContext(),"Error: No puedes eliminar al Default Admin",Toast.LENGTH_SHORT);
                                 toast.show();
@@ -125,7 +124,7 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
 
 
                 if (userTypeSpinner.getSelectedItem().toString().equals("Clientes")){
-                    final Cliente cliente=(Cliente)MainActivity.getListaDeUsuarios().getUserByUsername(clientes.get(position));
+                    final Cliente cliente=(Cliente)MainActivity.getAdministradorDeUsuarios().getUserByUsername(clientes.get(position));
                     if (cliente.isBanned()){
                         builder.setTitle("¿Desbanear cliente?");
                     }else{
@@ -167,10 +166,10 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
     }
 
     private void updateList(){
-        clientes=MainActivity.getListaDeUsuarios().getAllClientes();
+        clientes=MainActivity.getAdministradorDeUsuarios().getAllClientes();
         clientes2=new ArrayList<>();
         for (String cliente : clientes) {
-            Cliente cliente2=(Cliente)MainActivity.getListaDeUsuarios().getUserByUsername(cliente);
+            Cliente cliente2=(Cliente)MainActivity.getAdministradorDeUsuarios().getUserByUsername(cliente);
             if (cliente2.isBanned()){
                 clientes2.add(cliente+"    "+"*BANEADO*");
             }else{
@@ -178,7 +177,7 @@ public class AdministrarUsuariosActivity extends AppCompatActivity {
             }
         }
 
-        admins=MainActivity.getListaDeUsuarios().getAllAdmins();
+        admins=MainActivity.getAdministradorDeUsuarios().getAllAdmins();
         adapterClientes=new ArrayAdapter<String>(this,R.layout.list_view_info,R.id.nameTextView,clientes2);
         adapterAdmins=new ArrayAdapter<String>(this,R.layout.list_view_info,R.id.nameTextView,admins);
         if(userTypeSpinner.getSelectedItem().toString().equals("Clientes")){

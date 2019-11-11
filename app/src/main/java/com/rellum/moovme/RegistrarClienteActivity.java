@@ -41,7 +41,7 @@ public class RegistrarClienteActivity extends AppCompatActivity {
                 if (nombreYApellido.length()>0 && alias.length()>0 && username.length()>0 && password.length()>0 && phone.length()>0){
                     int phoneNumber = Integer.parseInt(phone);
                     try {
-                        MainActivity.getListaDeUsuarios().agregarCliente(nombreYApellido,alias,username,password,phoneNumber);
+                        MainActivity.getAdministradorDeUsuarios().agregarCliente(nombreYApellido,alias,username,password,phoneNumber);
                         Toast toast=Toast.makeText(getApplicationContext(),"Usuario registrado con éxito",Toast.LENGTH_SHORT);
                         toast.show();
                         finish();

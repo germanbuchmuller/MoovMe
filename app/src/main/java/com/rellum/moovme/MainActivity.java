@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.rellum.moovme.clases.Admin;
 import com.rellum.moovme.clases.AdministradorDeZonas;
 import com.rellum.moovme.clases.Cliente;
-import com.rellum.moovme.clases.ListaDeUsuarios;
+import com.rellum.moovme.clases.AdministradorDeUsuarios;
 import com.rellum.moovme.clases.OperadorDePuntaje;
 import com.rellum.moovme.clases.Tarifario;
 import com.rellum.moovme.clases.Terminal;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private static ListaDeUsuarios listaDeUsuarios;
+    private static AdministradorDeUsuarios administradorDeUsuarios;
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         tarifas=new Tarifario();
         tiposDeActivo=new HashMap<String, TipoDeActivo>();
         administradorDeZonas=new AdministradorDeZonas();
-        listaDeUsuarios = new ListaDeUsuarios();
+        administradorDeUsuarios = new AdministradorDeUsuarios();
         operadorDePuntaje=new OperadorDePuntaje();
 
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     try {
                         //Nos fijamos si existe el usuario ingresado
-                        Usuario user = listaDeUsuarios.getUserByUsername(usernameEditText.getText().toString());
+                        Usuario user = administradorDeUsuarios.getUserByUsername(usernameEditText.getText().toString());
                         if (user.getPassword().equals(passwordEditText.getText().toString())){
                             if (user.getClass()== Admin.class) {
                                 loggedInUser=user;
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public static ListaDeUsuarios getListaDeUsuarios(){
-        return listaDeUsuarios;
+    public static AdministradorDeUsuarios getAdministradorDeUsuarios(){
+        return administradorDeUsuarios;
     }
 
     public static Usuario getLoggedInUser(){
